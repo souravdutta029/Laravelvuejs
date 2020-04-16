@@ -37916,7 +37916,7 @@ var staticRenderFns = [
                       staticClass: "modal-title",
                       attrs: { id: "Add-NewLabel" }
                     },
-                    [_vm._v("Modal title")]
+                    [_vm._v("Add Users")]
                   ),
                   _vm._v(" "),
                   _c(
