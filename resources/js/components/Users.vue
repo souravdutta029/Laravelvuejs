@@ -56,7 +56,12 @@
             </button>
         </div>
         <div class="modal-body">
-            ...
+            <div class="form-group">
+              <input v-model="form.username" type="text" name="name" autocomplete="off"
+                  placeholder="Name"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                <has-error :form="form" field="name"></has-error>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close
@@ -72,3 +77,23 @@
 
     </div>
 </template>
+
+<script>
+  export default  {
+    data(){
+      return{
+        form : new Form({
+          name : '',
+          email : '',
+          password : '',
+          type : '',
+          bio : '',
+          photo : '',
+        }),
+      }
+    },
+    mounted(){
+      console.log('Component mounted.')
+    }
+  }
+</script>
