@@ -45413,3 +45413,8 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+.router-link-exact-active {
+  background: #3396FF !important;
+  color: white !important;
+}
+
