@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Since we are using vue routes inplace of laravel route, it will cause error while
+// opening the link, to solve do the following:
+
+Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
