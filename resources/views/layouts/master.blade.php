@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-users-cog"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p>
                 Management
                 <i class="right fa fa-angle-left"></i>
