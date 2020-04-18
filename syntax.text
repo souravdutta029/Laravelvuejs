@@ -1,0 +1,8 @@
+routes:
+    api.php:
+
+
+Create a controller for user.
+=> php artisan make:controller API/UserController --api
+=> this will make an API folder and make the controller.
+=> after creating the api controller, registe it at route/api.php.
