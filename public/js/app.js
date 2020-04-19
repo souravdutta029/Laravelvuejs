@@ -2163,26 +2163,53 @@ __webpack_require__.r(__webpack_exports__);
         return _this.users = data.data;
       });
     },
-    createUser: function createUser() {
-      this.$Progress.start();
-      this.form.post('api/user');
-      Fire.$emit('AfterCreate'); // for refreshing the page
+    deleteUser: function deleteUser(id) {
+      var _this2 = this;
 
-      $('#Add-New').modal('hide');
-      Toast.fire({
-        icon: 'success',
-        title: 'User Created successfully'
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        // send request to the server
+        if (result.value) {
+          _this2.form["delete"]('api/user/' + id).then(function () {
+            Swal.fire('Deleted!', 'User has been deleted.', 'success');
+            Fire.$emit('AfterCreate');
+          })["catch"](function () {
+            Swal("Failed", "Something went wrong", "warning");
+          });
+        }
       });
-      this.$Progress.finish();
+    },
+    createUser: function createUser() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.post('api/user').then(function () {
+        Fire.$emit('AfterCreate'); // for refreshing the page
+
+        $('#Add-New').modal('hide');
+        Toast.fire({
+          icon: 'success',
+          title: 'User Created successfully'
+        });
+
+        _this3.$Progress.finish();
+      });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this4 = this;
 
     this.loadUsers(); // setInterval(() => this.loadUsers(), 3000);
 
     Fire.$on('AfterCreate', function () {
-      _this2.loadUsers();
+      _this4.loadUsers();
     });
   }
 });
@@ -59555,7 +59582,27 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", [
+                        _vm._m(2, true),
+                        _vm._v("  \n                "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteUser(user.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-trash-alt red",
+                              attrs: { title: "delete" }
+                            })
+                          ]
+                        )
+                      ])
                     ])
                   })
                 ],
@@ -59878,17 +59925,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-edit blue", attrs: { title: "edit" } })
-      ]),
-      _vm._v("  \n                "),
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fas fa-trash-alt red",
-          attrs: { title: "delete" }
-        })
-      ])
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-edit blue", attrs: { title: "edit" } })
     ])
   },
   function() {
@@ -75097,7 +75135,6 @@ var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_2___default.a.mixin({
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000,
-  timerProgressBar: true,
   onOpen: function onOpen(toast) {
     toast.addEventListener('mouseenter', sweetalert2__WEBPACK_IMPORTED_MODULE_2___default.a.stopTimer);
     toast.addEventListener('mouseleave', sweetalert2__WEBPACK_IMPORTED_MODULE_2___default.a.resumeTimer);

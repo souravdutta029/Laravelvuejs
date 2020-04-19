@@ -37,3 +37,7 @@ Register the vue filter at app.js
         Use Custom Event to Send HTTP Request After You Create the User:
         2. Method 2 : custom events.
         => 
+
+        Using Promise to Detect Successfull HTTP Request
+        => see the code you will understand
+        

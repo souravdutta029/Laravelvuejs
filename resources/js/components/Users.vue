@@ -34,7 +34,7 @@
                     <a href="#"> 
                     <i class="fas fa-edit blue" title="edit"></i>
                     </a> &nbsp;
-                    <a href="#"> 
+                    <a href="#"  @click="deleteUser(user.id)"> 
                     <i class="fas fa-trash-alt red" title="delete"></i>
                     </a>
                   </td>
@@ -133,20 +133,47 @@
       loadUsers(){
         axios.get('api/user').then(({data}) => (this.users = data.data));
       },
+      deleteUser(id){
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+
+          // send request to the server
+          if (result.value) {
+            this.form.delete('api/user/'+id).then(() => {
+                Swal.fire(
+                  'Deleted!',
+                  'User has been deleted.',
+                  'success'
+                )
+              Fire.$emit('AfterCreate');
+            }).catch(() => {
+              Swal("Failed", "Something went wrong", "warning")
+            });
+        }
+      })
+    },
       createUser(){
         this.$Progress.start();
         this.form.post('api/user')
+        .then(() => {
+          Fire.$emit('AfterCreate'); // for refreshing the page
 
-        Fire.$emit('AfterCreate'); // for refreshing the page
+          $('#Add-New').modal('hide');
 
-        $('#Add-New').modal('hide');
+          Toast.fire({
+            icon: 'success',
+            title: 'User Created successfully'
+          })
 
-        Toast.fire({
-          icon: 'success',
-          title: 'User Created successfully'
-        })
-
-        this.$Progress.finish();
+          this.$Progress.finish();
+        });
       }
     },
     created(){
