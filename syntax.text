@@ -6,3 +6,11 @@ Create a controller for user.
 => php artisan make:controller API/UserController --api
 => this will make an API folder and make the controller.
 => after creating the api controller, registe it at route/api.php.
+
+insert: create()
+show : all()
+
+//displaying the latest user
+return User::latest()->paginate(10);
+
+//Global Vuejs filter and Momentjs Instead of Carbon
