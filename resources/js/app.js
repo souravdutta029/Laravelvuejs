@@ -26,6 +26,25 @@ Vue.use(VueProgressBar, {
   },
 });
 
+// Sweet alert (after ajax request)
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+window.Toast = Toast;
+
+
 // vform
 import { Form, HasError, AlertError } from 'vform'
 
@@ -64,6 +83,9 @@ Vue.filter('upText', function(text){
 Vue.filter('myDate', function(datetime){
   return moment(datetime).format('MMMM Do YYYY, h:mm a');
 });
+
+// Custom Event to Send HTTP Request After You Create the User
+window.Fire = new Vue(); // we can this everywhere in the application
 
 /**
  * The following block of code may be used to automatically register your

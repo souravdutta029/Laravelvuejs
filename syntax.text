@@ -21,4 +21,19 @@ Register the vue filter at app.js
 
 //ProgressBar with Vuejs and Laravel When Create new Record with Ajax:
     1. download the progress bar: npm install vue-progressbar
-    2.  
+
+// Sweet alert (after ajax request)
+    1. Download : npm install -S vue-sweetalert2
+    2. import VueSweetalert2 from 'vue-sweetalert2';
+
+// Refreshing the page after ajax request:
+    For this there is total 3 ways:
+        1. Method 1: set the timeinterval to send http request to the server.
+        => setInterval(()=> this.loadUsers(), 3000);
+        This function will refreshes every 3secs i.e in every 3 secds it passes a resquest to the 
+        server. Most large website uses this technique.
+        => This is not bad but for performance it not do good.
+
+        Use Custom Event to Send HTTP Request After You Create the User:
+        2. Method 2 : custom events.
+        => 
