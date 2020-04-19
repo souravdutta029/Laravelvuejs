@@ -38,6 +38,9 @@ Register the vue filter at app.js
         2. Method 2 : custom events.
         => 
 
-        Using Promise to Detect Successfull HTTP Request
+        Using Promise to Detect Successfull HTTP Request for Delete
         => see the code you will understand
+
+        Edit:
         
+

@@ -8,7 +8,7 @@
 
               <div class="card-tools">
                     <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Add-New">Add New
+                <button type="button" class="btn btn-success" @click="newModal">Add New
                     <i class="fas fa-user-plus fa-fw orange"></i>
                 </button>
                 </div>
@@ -31,7 +31,7 @@
                   <td>{{user.type | upText}}</td>
                   <td><span class="label label-success">{{user.created_at | myDate}}</span></td>
                   <td>
-                    <a href="#"> 
+                    <a href="#" @click="editModal(user)"> 
                     <i class="fas fa-edit blue" title="edit"></i>
                     </a> &nbsp;
                     <a href="#"  @click="deleteUser(user.id)"> 
@@ -130,9 +130,21 @@
       }
     },
     methods: {
+      editModal(user){
+        this.form.reset();
+        $('#Add-New').modal('show');
+        this.form.fill(user);
+      },
+      
+      newModal(){
+        this.form.reset();
+        $('#Add-New').modal('show');
+      },
+      
       loadUsers(){
         axios.get('api/user').then(({data}) => (this.users = data.data));
       },
+      
       deleteUser(id){
         Swal.fire({
           title: 'Are you sure?',
