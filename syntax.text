@@ -18,3 +18,7 @@ Register the vue filter at app.js
 
 // In laravel we can use carbon to display the date into more human readable.
 // In JavaScript : we can use moment.js
+
+//ProgressBar with Vuejs and Laravel When Create new Record with Ajax:
+    1. download the progress bar: npm install vue-progressbar
+    2.  

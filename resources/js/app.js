@@ -11,6 +11,21 @@ window.Vue = require('vue');
 // Importing momemt.js
 import moment from 'moment';
 
+// Importing the progressbar
+import VueProgressBar from 'vue-progressbar';
+
+Vue.use(VueProgressBar, {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  height: '3px',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+});
+
 // vform
 import { Form, HasError, AlertError } from 'vform'
 
