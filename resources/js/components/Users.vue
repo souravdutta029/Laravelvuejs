@@ -28,8 +28,8 @@
                   <td>{{user.id}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
-                  <td>{{user.type}}</td>
-                  <td><span class="label label-success">{{user.created_at}}</span></td>
+                  <td>{{user.type | upText}}</td>
+                  <td><span class="label label-success">{{user.created_at | myDate}}</span></td>
                   <td>
                     <a href="#"> 
                     <i class="fas fa-edit blue" title="edit"></i>

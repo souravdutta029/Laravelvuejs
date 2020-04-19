@@ -14,3 +14,7 @@ show : all()
 return User::latest()->paginate(10);
 
 //Global Vuejs filter and Momentjs Instead of Carbon
+Register the vue filter at app.js
+
+// In laravel we can use carbon to display the date into more human readable.
+// In JavaScript : we can use moment.js

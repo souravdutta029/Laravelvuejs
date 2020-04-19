@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Importing momemt.js
+import moment from 'moment';
+
 // vform
 import { Form, HasError, AlertError } from 'vform'
 
@@ -36,6 +39,16 @@ const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
   })
+
+// Vue Global Filter declaration for text to capitalize
+Vue.filter('upText', function(text){
+  return text.charAt(0).toUpperCase() + text.slice(1);
+});
+
+// filter for time format
+Vue.filter('myDate', function(datetime){
+  return moment(datetime).format('MMMM Do YYYY, h:mm a');
+});
 
 /**
  * The following block of code may be used to automatically register your
