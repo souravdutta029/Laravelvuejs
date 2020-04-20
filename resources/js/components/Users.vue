@@ -52,12 +52,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="Add-NewLabel">Add Users</h5>
+            <h5 class="modal-title" v-show="!editmode" id="Add-NewLabel">Add Users</h5>
+            <h5 class="modal-title" v-show="editmode" id="Add-NewLabel">Update User's Info</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form @submit.prevent="createUser">
+        <form @submit.prevent="editmode ? updateUser() : createUser()">
           <div class="modal-body">
               <div class="form-group">
                 <input v-model="form.name" type="text" name="name" autocomplete="off"
@@ -102,7 +103,10 @@
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close
                   <i class="fas fa-times-circle fa-fw"></i>
               </button>
-              <button type="submit" class="btn btn-primary">Create
+              <button type="submit" class="btn btn-success" v-show="editmode">Update
+                  <i class="fas fa-wrench fa-fw"></i>
+              </button>
+              <button type="submit" class="btn btn-primary" v-show="!editmode">Create
                   <i class="fas fa-plus-circle fa-fw"></i>
               </button>
           </div>
@@ -118,8 +122,10 @@
   export default  {
     data(){
       return{
+        editmode : false,
         users : {},
         form : new Form({
+          id : '',
           name : '',
           email : '',
           password : '',
@@ -130,13 +136,35 @@
       }
     },
     methods: {
+      updateUser(){
+        // console.log("Edit Data");
+        this.$Progress.start();
+        this.form.put('api/user/'+this.form.id)
+        .then(() => {
+          // success
+          $('#Add-New').modal('hide');
+          Swal.fire(
+            'Updated!',
+            'Information has been updated.',
+            'success'
+          )
+          this.$Progress.finish();
+          Fire.$emit('AfterCreate');
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        })
+      },
+      
       editModal(user){
+        this.editmode = true;
         this.form.reset();
         $('#Add-New').modal('show');
         this.form.fill(user);
       },
       
       newModal(){
+        this.editmode = false;
         this.form.reset();
         $('#Add-New').modal('show');
       },
